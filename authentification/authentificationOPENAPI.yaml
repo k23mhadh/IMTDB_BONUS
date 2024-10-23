@@ -1,0 +1,144 @@
+openapi: 3.0.1
+info:
+  title: User Authentication API
+  description: API for user registration, login, and protected routes with JWT token authentication.
+  version: 1.0.0
+  contact:
+    name: Authentication Service
+    url: http://localhost:5000
+servers:
+  - url: http://localhost:5000
+    description: Local development server
+paths:
+  /register:
+    post:
+      summary: Register a new user
+      description: Creates a new user with a hashed password and stores it in MongoDB.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: user1
+                  description: The username of the user to register.
+                password:
+                  type: string
+                  example: secret123
+                  description: The password of the user (plaintext, will be hashed).
+      responses:
+        '201':
+          description: Successfully registered.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Registered successfully
+        '400':
+          description: User already exists.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User already exists
+  /login:
+    post:
+      summary: Login user and get JWT token
+      description: Authenticates the user and returns a JWT token if the username and password match.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: user1
+                  description: The username of the user trying to log in.
+                password:
+                  type: string
+                  example: secret123
+                  description: The password of the user.
+      responses:
+        '200':
+          description: User authenticated and JWT token returned.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+        '401':
+          description: Invalid password.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid password
+        '404':
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User not found
+  /protected:
+    get:
+      summary: Access a protected route
+      description: Returns a message if the user is authorized by providing a valid JWT token.
+      parameters:
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+            description: JWT token to authorize the request.
+            example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+      responses:
+        '200':
+          description: User is authorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hello user1, you are authorized!
+        '403':
+          description: Token is missing or invalid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Token is missing!
+                  message_invalid:
+                    type: string
+                    example: Token is invalid!
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
