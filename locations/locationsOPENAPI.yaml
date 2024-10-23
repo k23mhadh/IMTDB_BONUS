@@ -1,0 +1,198 @@
+openapi: 3.0.1
+info:
+  title: Cinema Locations Service API
+  description: API for retrieving cinema locations and movie showings by cinema and date.
+  version: 1.0.0
+  contact:
+    name: Cinema Locations Service
+    url: http://localhost:6009
+servers:
+  - url: http://localhost:6009
+    description: Local development server
+paths:
+  /:
+    get:
+      summary: Welcome to the location service
+      description: Returns a welcome message for the location service.
+      responses:
+        '200':
+          description: A welcome message.
+          content:
+            text/html:
+              schema:
+                type: string
+  /cinemas:
+    get:
+      summary: Get all cinema locations
+      description: Retrieves a list of all cinema locations from the locations database.
+      responses:
+        '200':
+          description: A list of cinema locations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The ID of the cinema.
+                    name:
+                      type: string
+                      description: The name of the cinema.
+                    address:
+                      type: string
+                      description: The address of the cinema.
+                    movies_by_date:
+                      type: object
+                      additionalProperties:
+                        type: array
+                        items:
+                          type: string
+                          description: Movie IDs
+  /cinemas/{cinemaid}:
+    get:
+      summary: Get cinema details by ID
+      description: Retrieves details of a specific cinema using its ID.
+      parameters:
+        - in: path
+          name: cinemaid
+          schema:
+            type: string
+          required: true
+          description: The ID of the cinema to retrieve.
+      responses:
+        '200':
+          description: Details of the specified cinema.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the cinema.
+                  name:
+                    type: string
+                    description: The name of the cinema.
+                  address:
+                    type: string
+                    description: The address of the cinema.
+                  movies_by_date:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+                        description: Movie IDs
+        '400':
+          description: Cinema not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Cinema not found
+  /cinemas_by_movie:
+    get:
+      summary: Get cinemas showing a specific movie
+      description: Retrieves a list of cinemas that are showing a specified movie.
+      parameters:
+        - in: query
+          name: movie_id
+          schema:
+            type: string
+          required: true
+          description: The ID of the movie.
+      responses:
+        '200':
+          description: List of cinemas showing the movie.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    cinema_id:
+                      type: string
+                      description: The ID of the cinema.
+                    dates:
+                      type: array
+                      items:
+                        type: string
+                        description: Dates when the movie is being shown.
+        '400':
+          description: Movie ID is required.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Movie_id is required
+        '404':
+          description: Movie not found in any cinema.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Movie not found in any cinema
+  /cinemas_by_movie_and_date:
+    get:
+      summary: Get cinemas showing a specific movie on a specific date
+      description: Retrieves a list of cinemas showing a specified movie on a specified date.
+      parameters:
+        - in: query
+          name: movie_id
+          schema:
+            type: string
+          required: true
+          description: The ID of the movie.
+        - in: query
+          name: date
+          schema:
+            type: string
+            format: date
+          required: true
+          description: The date to check for movie showings (format: YYYY-MM-DD).
+      responses:
+        '200':
+          description: List of cinemas showing the movie on the given date.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    cinema_id:
+                      type: string
+                      description: The ID of the cinema.
+        '400':
+          description: Both movie ID and date are required.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: movie_id and date are required
+        '404':
+          description: Movie not found in any cinema for the given date.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Movie not found in any cinema for the given date
