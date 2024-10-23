@@ -2,6 +2,7 @@
     "actors": [
       {
         "id": "actor1",
+        "image":"https://tinyurl.com/47aqdeca",
         "firstname": "Leonardo",
         "lastname": "DiCaprio",
         "birthyear": 1974,
@@ -9,6 +10,7 @@
       },
       {
         "id": "actor2",
+        "image":"https://fr.web.img4.acsta.net/c_310_420/pictures/23/05/12/11/08/4467897.jpg",
         "firstname": "Monica",
         "lastname": "Bellucci",
         "birthyear": 1964,
@@ -18,6 +20,7 @@
         "id": "actor3",
         "firstname": "Alain",
         "lastname": "Chabat",
+        "image":"https://www.francetvinfo.fr/pictures/z-PM0NirP3PBR80Q-DHfgX1je2Y/1200x1200/2019/04/12/alain_chabat_santa_cie_france_2.png",
         "birthyear": 1958,
         "films": ["96798c08-d19b-4986-a05d-7da856efb697"]
       },
@@ -25,6 +28,8 @@
         "id": "actor4",
         "firstname": "George",
         "lastname": "Clooney",
+        "image":"https://images.lanouvellerepublique.fr/image/upload/5a119a89489a45543e8b45d0",
+
         "birthyear": 1961,
         "films": ["a8034f44-aee4-44cf-b32c-74cf452aaaae"]
       },
@@ -32,6 +37,7 @@
         "id": "actor5",
         "firstname": "Jean",
         "lastname": "Dujardin",
+        "image":"https://www.gala.fr/imgre/fit/~1~gal~2024~01~24~28cfa36a-6491-420d-afe1-f5fcb10057fa.jpeg/1048x798/quality/80/jean-dujardin.jpeg",
         "birthyear": 1972,
         "films": ["39ab85e5-5e8e-4dc5-afea-65dc368bd7ab","720d006c-3a57-4b6a-b18f-9b713b073f3c"]
       },
@@ -39,6 +45,7 @@
         "id": "actor6",
         "firstname": "Daniel",
         "lastname": "Radcliffe",
+        "image":"https://www.gala.fr/imgre/fit/~1~gal~2024~04~15~7620af49-c57a-4157-9308-37f120dcaf40.jpeg/5643x3620/quality/80/daniel-radcliffe.jpeg",
         "birthyear": 1989,
         "films": ["7daf7208-be4d-4944-a3ae-c1c2f516f3e6","39ab85e5-5e8e-4dc5-afea-65dc368bd7ab"]
       }

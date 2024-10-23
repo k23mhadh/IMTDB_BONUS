@@ -1,1 +1,60 @@
-{"movies": [{"title": "The Good Dinosaur", "rating": 7.4, "director": "Peter Sohn", "id": "720d006c-3a57-4b6a-b18f-9b713b073f3c"}, {"title": "The Martian", "rating": 8.4, "director": "Ridley Scott", "id": "a8034f44-aee4-44cf-b32c-74cf452aaaae"}, {"title": "The Night Before", "rating": 7.4, "director": "Jonathan Levine", "id": "96798c08-d19b-4986-a05d-7da856efb697"}, {"title": "Creed", "rating": 8.8, "director": "Ryan Coogler", "id": "267eedb8-0f5d-42d5-8f43-72426b9fb3e6"}, {"title": "Victor Frankenstein", "rating": 6.4, "director": "Paul McGuigan", "id": "7daf7208-be4d-4944-a3ae-c1c2f516f3e6"}, {"title": "The Danish Girl", "rating": 5.3, "director": "Tom Hooper", "id": "276c79ec-a26a-40a6-b3d3-fb242a5947b6"}, {"title": "Spectre", "rating": 7.1, "director": "Sam Mendes", "id": "39ab85e5-5e8e-4dc5-afea-65dc368bd7ab"}]}
+{
+    "movies": [
+        {
+            "title": "The Good Dinosaur",
+            "rating": 7.4,
+            "director": "Peter Sohn",
+            "id": "720d006c-3a57-4b6a-b18f-9b713b073f3c",
+            "poster": "https://pictures.abebooks.com/isbn/9781474843768-fr.jpg",
+            "overview": "In a world where dinosaurs never went extinct, a timid Apatosaurus named Arlo makes an unlikely human friend, and together they embark on a journey to find Arlo's way home."
+        },
+        {
+            "title": "The Martian",
+            "rating": 8.4,
+            "director": "Ridley Scott",
+            "id": "a8034f44-aee4-44cf-b32c-74cf452aaaae",
+            "poster": "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p10980706_p_v13_ar.jpg",
+            "overview": "An astronaut becomes stranded on Mars after his team mistakenly assumes he is dead. Using his ingenuity and spirit, he must figure out how to survive while awaiting rescue."
+        },
+        {
+            "title": "The Night Before",
+            "rating": 7.4,
+            "director": "Jonathan Levine",
+            "id": "96798c08-d19b-4986-a05d-7da856efb697",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTkyNDY1ODQwNV5BMl5BanBnXkFtZTgwNzA2MjUwNzE@._V1_.jpg",
+            "overview": "On Christmas Eve, three lifelong friends spend their last Christmas Eve together looking for the Holy Grail of Christmas parties."
+        },
+        {
+            "title": "Creed",
+            "rating": 8.8,
+            "director": "Ryan Coogler",
+            "id": "267eedb8-0f5d-42d5-8f43-72426b9fb3e6",
+            "poster": "https://m.media-amazon.com/images/I/81j6YIG2k-L._AC_UF1000,1000_QL80_.jpg",
+            "overview": "Adonis Johnson, the son of Apollo Creed, seeks out Rocky Balboa to train him in the ring and help him prove himself in the world of boxing."
+        },
+        {
+            "title": "Victor Frankenstein",
+            "rating": 6.4,
+            "director": "Paul McGuigan",
+            "id": "7daf7208-be4d-4944-a3ae-c1c2f516f3e6",
+            "poster": "https://m.media-amazon.com/images/M/MV5BODA5MDc2NDI5OF5BMl5BanBnXkFtZTgwNDYzMTA2NjE@._V1_.jpg",
+            "overview": "Told from Igor's perspective, the story follows the relationship between Victor Frankenstein and his protégé Igor as they create a creature and explore the nature of life and death."
+        },
+        {
+            "title": "The Danish Girl",
+            "rating": 5.3,
+            "director": "Tom Hooper",
+            "id": "276c79ec-a26a-40a6-b3d3-fb242a5947b6",
+            "poster": "https://m.media-amazon.com/images/I/81-ykBeadPL._AC_UF1000,1000_QL80_.jpg",
+            "overview": "A fictionalized account of the life of Danish painter Einar Wegener, who was one of the first recipients of gender confirmation surgery in the 1920s."
+        },
+        {
+            "title": "Spectre",
+            "rating": 7.1,
+            "director": "Sam Mendes",
+            "id": "39ab85e5-5e8e-4dc5-afea-65dc368bd7ab",
+            "poster": "https://fr.web.img3.acsta.net/pictures/15/10/06/15/22/344427.jpg",
+            "overview": "James Bond uncovers a sinister organization while facing a ghost from his past and confronting the secrets of his own history."
+        }
+    ]
+}

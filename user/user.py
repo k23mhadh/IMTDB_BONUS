@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, jsonify, make_response
 import requests
 import json
 from werkzeug.exceptions import NotFound
+from flask_cors import CORS
 
 # CALLING gRPC requests
 import grpc
@@ -12,7 +13,7 @@ import booking_pb2_grpc
 
 
 app = Flask(__name__)
-
+CORS(app)
 PORT = 3004
 HOST = '0.0.0.0'
 
@@ -46,6 +47,8 @@ def get_movies():
         title
         director
         rating
+        poster
+        overview
         actors {
             id
             firstname
@@ -57,7 +60,7 @@ def get_movies():
 }
 """
    movies_url = "http://localhost:3001"
-   movies_response = requests.post(movies_url + "/movies/graphql",json={'query': all_movies_query})
+   movies_response = requests.post(movies_url + "/graphql",json={'query': all_movies_query})
    print(movies_response)
    return make_response(movies_response.json(),200)
 
