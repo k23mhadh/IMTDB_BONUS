@@ -8,6 +8,7 @@ app = Flask(__name__)
 PORT = 6009
 HOST = '0.0.0.0'
 
+# Load cinema locations data from the JSON file at startup
 with open('{}/data/locations.json'.format("."), "r") as jsf:
    locations = json.load(jsf)["cinemas"]
 
@@ -15,11 +16,13 @@ with open('{}/data/locations.json'.format("."), "r") as jsf:
 def home():
    return "<h1 style='color:blue'>Welcome to the locations service!</h1>"
 
+# Route to retrieve all cinema locations
 @app.route("/cinemas", methods=['GET'])
 def get_users():
     res = make_response(jsonify(locations), 200)
     return res
 
+# Route to get a specific cinema by its ID
 @app.route("/cinemas/<cinemaid>", methods=['GET'])
 def get_cinema_byid(cinemaid):
     for cinema in locations:
@@ -28,9 +31,9 @@ def get_cinema_byid(cinemaid):
             return res
     return make_response(jsonify({"error":"Cinema not found"}),400)
 
+# Route to get cinemas showing a specific movie
 @app.route('/cinemas_by_movie', methods=['GET'])
 def get_cinemas_by_movie():
-    # Récupère le movie_id depuis les paramètres de requête
     movie_id = request.args.get('movie_id')
     
     if not movie_id:
@@ -38,28 +41,24 @@ def get_cinemas_by_movie():
     
     result = []
     
-    # Parcourt les cinémas
     for cinema in locations:
         cinema_result = {"cinema_id": cinema["id"], "dates": []}
         
-        # Parcourt les dates pour chaque cinéma
         for date, movies in cinema["movies_by_date"].items():
             if movie_id in movies:
                 cinema_result["dates"].append(date)
         
-        # Ajoute les cinémas qui projettent le film
         if cinema_result["dates"]:
             result.append(cinema_result)
     
-    # Vérifie si le film est projeté dans au moins un cinéma
     if result:
         return jsonify(result), 200
     else:
         return jsonify({"message": "Movie not found in any cinema"}), 404
-    
+
+# Route to get cinemas showing a specific movie on a specific date   
 @app.route('/cinemas_by_movie_and_date', methods=['GET'])
 def get_cinemas_by_movie_and_date():
-    # Récupérer movie_id et date des paramètres de requête
     movie_id = request.args.get('movie_id')
     date = request.args.get('date')
 
@@ -68,15 +67,11 @@ def get_cinemas_by_movie_and_date():
 
     result = []
 
-    # Parcours des cinémas
     for cinema in locations:
-        # Vérification si la date existe pour ce cinéma
         if date in cinema["movies_by_date"]:
-            # Vérification si le film est projeté à cette date
             if movie_id in cinema["movies_by_date"][date]:
                 result.append({"cinema_id": cinema["id"]})
     
-    # Vérifie si le film est projeté dans au moins un cinéma à la date donnée
     if result:
         return jsonify(result), 200
     else:
