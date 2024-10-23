@@ -30,6 +30,7 @@ def get_users():
    res = make_response(jsonify(users), 200)
    return res
 
+
 @app.route("/users/<userid>", methods=['GET'])
 def get_user_byid(userid):
    for user in users:
@@ -64,7 +65,6 @@ def get_movies():
    print(movies_response)
    return make_response(movies_response.json(),200)
 
-#toReplace
 @app.route("/bookingInfo/<userId>", methods=['GET'])
 def get_booking_info(userId):
     movies_url = "http://localhost:3001"

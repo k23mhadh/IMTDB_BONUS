@@ -5,16 +5,18 @@ import jwt
 import datetime
 from functools import wraps
 import bcrypt
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # Secret key for encoding JWT tokens
 app.config['SECRET_KEY'] = 'f123456789uck'  
 
 # MongoDB config
-app.config["MONGO_URI"] = "mongodb+srv://kaiesmhadhbi:17wGQ3pmV1XBjg0Q@cluster0.astll.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+app.config["MONGO_URI"] = "mongodb+srv://kaiesmhadhbi:imtdbpassword@cluster0.7sywr.mongodb.net/imtdb?retryWrites=true&w=majority&appName=Cluster0"
 mongo = PyMongo(app)
-users = mongo.db.IMTDB_auth  # Users collection
+users = mongo.db.users  # Users collection
 
 # Helper function to check token
 def token_required(f):
@@ -43,15 +45,18 @@ def register():
     data = request.get_json()
 
     # Check if user exists
-    existing_user = users.find_one({'username': data['username']})
+    existing_user = users.find_one({'email': data['email']})
     
     if existing_user:
         return jsonify({'message': 'User already exists'}), 400
 
     hashed_password = bcrypt.hashpw(data['password'].encode('utf-8'), bcrypt.gensalt())
 
-    users.insert_one({'username': data['username'], 'password': hashed_password})
-    
+    users.insert_one({
+        'email': data['email'], 
+        'password': hashed_password,
+        'name': data['name']
+    })    
     return jsonify({'message': 'Registered successfully'}), 201
 
 # Login route
@@ -60,13 +65,13 @@ def login():
     data = request.get_json()
 
     # Fetch user from database
-    user = users.find_one({'username': data['username']})
+    user = users.find_one({'email': data['email']})
 
     if user:
         # Check password
         if bcrypt.checkpw(data['password'].encode('utf-8'), user['password']):
             token = jwt.encode(
-                {'username': user['username'], 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)},
+                {'email': user['email'], 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)},
                 app.config['SECRET_KEY'], algorithm="HS256"
             )
             return jsonify({'token': token})
