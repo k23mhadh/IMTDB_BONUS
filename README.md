@@ -23,7 +23,7 @@ IMTDB is a web-based movie booking and information platform, providing features 
 #### Installation
 
 1. **Clone the repository**
-   ```bash
+   ```
    git clone https://github.com/k23mhadh/IMTDB_BONUS.git
    cd IMTDB_BONUS
 
@@ -31,14 +31,12 @@ Set up the backend
 Navigate to the backend directory.
 Install the required Python packages.
 
-    bash
 
-pip install -r requirements.txt
+      pip install -r requirements.txt
 
 Configure your environment variables (e.g., MongoDB URI).
 Run the Flask server.
 
-bash
 
       pymon app.py
 
@@ -47,13 +45,13 @@ Set up the frontend
 Navigate to the frontend directory.
 Install the required npm packages.
 
-bash
+
 
       npm install
 
 Start the React application.
 
-bash
+
 
     npm run start
 
